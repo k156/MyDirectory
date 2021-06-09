@@ -1,155 +1,147 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-import re
-from pprint import pprint
+seconds_per_hour = 60 * 60
+seconds_per_day = seconds_per_hour * 24
+# print( seconds_per_day/seconds_per_hour )
+# print( seconds_per_day//seconds_per_hour )
 
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'}
+year_list = []
 
-# print(r.text)
-i = 1
-url='https://www.melon.com/chart/index.htm'
-r = requests.get(url=url, headers=headers)
-soup = BeautifulSoup(r.content, features="html.parser")
-trs = soup.select('div#tb_list table tbody tr[data-song-no]')
-fnd = re.compile('goAlbumDetail\(\'(.*)\'\)')
+things_list = ['mozzarella', 'cinderella', 'salmonella']
+# print( things_list[1].title() )
+# print(things_list[0].upper() )
+# things_list.remove('salmonella')
+# del things_list[2]
+# things_list.pop(2)
+# print(things_list)
 
+# surprise = ['Groucho', 'Chico', 'Harpo']
+# print(surprise[2].lower()[::-1].title())
+e2f = {'dog':'chien', 'walrus': 'morse'}
+# print(e2f)
+# print(e2f['walrus'])
+f2e = {}
+for i, j in e2f.items():
+    f2e[j] = i
+# print(f2e['chien'])
+# print(e2f.keys())
 
-for i, tr in enumerate(trs):
-    song_no = tr.attrs['data-song-no']
-    rank = i
-    i += 1
-    title = tr.find(class_ = 'ellipsis rank01').text
-    artist = tr.find(class_ = 'ellipsis rank02').span.a.text
-    album = tr.find(class_ = 'ellipsis rank03').text
-    albumId = tr.find(class_ = 'ellipsis rank03').a.attrs['href']
-    AlbumId = str(albumId)
-    result = fnd.findall(AlbumId)
-    # for ids in albumId:
-        
-        # AlbumId = re.findall(id_, ids)
-    print(result)
-
-
-# print(soup.prettify)
-
-# results1 = soup.find_all('div', class_ = 'ellipsis rank01')
-
-# for result in results1:
-#     print(result)
-
-# results2 = soup.find_all('div', class_ = 'ellipsis rank02')
-
-# for result in results2:
-#     print(result)
-
-# results3 = soup.find_all('div', class_ = 'ellipsis rank03')
-
-# for result in results3:
-#     print(result)
-
-        # result = re.findall('\'goSongDetail(.*)\'', l)
-       
-    # print(lst2)
-
-    # for l in lst:    
-        # lst2.append(re.search("\'goSongDetail(.*)\'"),l)
-        # print(re.search("\'goSongDetail(.*)\'"),l)
-
-    # pprint(lst) 
-
-# get_song_no()
-
-########################################################33
+otherdict = {'cats': 'Henri', 'octopi': 'Grumpy', 'emus': 'Lucy'}
+dict2 = {}
+dict3 = {}
+life = {'animals' : otherdict, 'plants': dict2 , 'others': dict3}
+# print(life.keys())
+# print(life['animals'])
+# print(life['animals']['cats'])
 
 
-# songlst = []
+####################
+# def knights(saying):
+#     def inner(quote):
+#         return "We are the knights who say: '%s'" % saying
+#     return inner
 
-# def likes(self):
-#     url= "https://www.melon.com/commonlike/getSongLike.json?contsIds={}".format(self)
-#     r = requests.get(url=url, headers=headers)
-#     soup = BeautifulSoup(r.content, features="html.parser")
-#     res = soup.text
-#     print(res)
+# knights('Ni!')
+########################
 
-# lst = []
-# lst2 = []
+# guess_me = 7
+# if guess_me < 7:
+#     print("too low")
+# elif guess_me > 7:
+#     print("too high")
+# else:
+#     print("just right")
 
-# def get_song_no():
-#     url='https://www.melon.com/chart/index.htm'
-#     r = requests.get(url=url, headers=headers)
-#     soup = BeautifulSoup(r.content, features="html.parser")
-#     res = soup.tbody
-#     # for songDetail in res.find_all(href=re.compile("goSongDetail")):
-#     #     print(songDetail.string)
+# start = 1
 
-#     # songDetail = res.find_all(href=re.compile("goSongDetail"))
-#     # sd = str(songDetail)
-#     # print(re.search("\'goSongDetail(.*)\'"),sd)
-    
-
-#     songDetail = res.find_all(href=re.compile("goSongDetail"))
-
-#     for x in songDetail:
-#         lst.append(str(x))
-#     for l in lst:
-#         lst2.append ( re.findall("goSongDetail\(\'(\d*)\'\)", l) )
-#     return lst2
-# lst3 = []
-
-# def get_likes():
-#     get_song_no()   
-#     for m in lst2:    
-#         lst3.append( m[0].strip("'"))
-#     # print(lst3)
-#     for n in lst3:
-#         likes(n)    
-# get_likes()
-#########################################################
+# while True:
+#     if start < guess_me:
+#         print(start)
+#         print("too low")
+#     elif start == guess_me:
+#         print(start)
+#         print("found it!")
+#     elif start > guess_me:
+#         print(start)
+#         print("oops")
+#         break
+#     start += 1
 
 
 
-
-# def get_likes():
-#     # i = 0
-#     # ids = "33239419%2C33061995%2C32872978%2C33077590%2C33013877%2C32961718%2C32794652%2C33229299%2C32578498%2C32998018%2C3894276%2C33244575%2C32183386%2C33011180%2C3414749%2C33260801%2C33167063%2C33077234%2C32871975%2C33115807%2C32962258%2C32003395%2C33193809%2C32061975%2C32525311%2C33107649%2C33104090%2C30962526%2C32224272%2C32438894%2C32720013%2C32156286%2C32378104%2C32559782%2C32491274%2C32853712%2C31029291%2C31853557%2C32570501%2C31737197%2C32055419%2C33150997%2C32345931%2C32224166%2C32777869%2C32187544%2C33247490%2C30244931%2C32559781%2C32143487%2C33001672%2C31979846%2C31388145%2C33120545%2C32725013%2C33016659%2C32651098%2C31984204%2C33115804%2C32978341%2C33248758%2C30773554%2C33164083%2C32808616%2C33265859%2C33077591%2C33115806%2C31509376%2C33002813%2C33137384%2C32508053%2C32825454%2C32486613%2C33150993%2C33280399%2C32998020%2C32137576%2C33043504%2C31341518%2C32614125%2C33139117%2C32313543%2C33061829%2C32947184%2C32122539%2C33067476%2C33269643%2C32906021%2C33129712%2C32996210%2C33257245%2C33133804%2C32399830%2C32790516%2C30717645%2C33016550%2C33133799%2C33160574%2C33169122%2C33223396"
-#     # lst = ids.split('%2C')
-#     for n in lst3:
-#         likes(n)
-#         # i += 1
-
-# get_likes
-# json.loads( get_likes() )
+# for i in [3, 2, 1, 0]:
+#     print(i)
 
 
+# for x in range(2, 11, 2):
+#     print(x)
 
 
-# results4 = soup.find_all('button', class_ = 'button_etc like')
+# numbers = [number for number in range(10) if number%2==0]
+# # print(numbers)
+# square = {i:i*i for i in range(10)}
+# # print(square)
+# a_set = {number for number in range(10) if number%2 ==1}
+# # print(a_set)
+# got_it = ( "Got"+ str(x) for x in range(10) )
+# for got in got_it:
+#     print(got)
+# def good():
+#     lst = ['Harry', 'Ron', 'Hermione']
+#     return lst
+# good()
+# def get_odds():
+#     lst = list (x for x in range(10) if x%2==1)
+#     return lst[2]
+# get_odds()
+# def test(func):
+#     def new_function(*args):
+#         print("start")
+#         result = func(*args)
+#         print("end")
+#         return result
+#     return new_function
+# @test
+# def add(a, b):
+#     c = a + b
+#     print(c)
+#     return c
+# add(3,4)
+# @test
+# def multiply(a):
+#     c = a * a
+#     print(c)
+#     return c
+# multiply(7)
+# @test
+# def subtract(a, b):
+#     c = a - b
+#     print(c)
+#     return c
+# subtract(7, 4)
+# class OopsException(Exception):
+#     print ("Caught an oops")
+# words = ['hello', 'jello', 'mello', 'bello', 'hello']
+# if set(words) != words:
+#     raise OopsException(words)
+# titles = ['Creature of Habit', 'Crewel Fate']
+# plots = ['A nun turns into a mon ster', 'A hunted yarn shop']
+# a = list(zip(titles, plots))
+# print(a)
 
-# # results4 = soup.select('tbody > tr')
 
-# # results4 = soup.select('cnt')
+# from collections import defaultdict, OrderedDict
+# # food_counter =  defaultdict(int)
+# # for food in ['spam', 'spam', 'eggs', 'spam']:
+# #     food_counter[food] += 1
 
-# # results4 = soup.find_all('span')
+# # for food, count in food_counter.items():
+# #     print(food, count)
 
+# plain = {'a': 1 , 'b': 2, 'c': 3}
+# print(plain)
+# fancy = OrderedDict(plain)
+# print(fancy)
+# dict_of_lists = defaultdict(list)
+# dict_of_lists['a'] = 'something for a'
+# print(dict_of_lists['a'])
 
-# for rates in results4:
-#     print(rates.text)
-
-
-# //*[@id="frm"]/div/table/tbody/tr[2]/td[6]/div/button/span[2]/text()
-# for rates in results4:
-#     r = rates.select('none').text
-#     print(r)
-
-
-# tbody = soup.find_parents('#frm > div > table > tbody')
-# for tr in tbody:
-#     print(tr)
-
-
-# data = json.loads(results4.text)      
-# for rank in data['contsLike']:    
-#     print(contsid["CONTSID"], likeyn["LIKEYN"], sumncnt["SUMMCNT"])
-
-
+el_dict = {'name': 'Hydrogen', 'symbol': 'H', 'number': 1 }
